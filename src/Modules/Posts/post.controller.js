@@ -91,3 +91,15 @@ export const listPostOfUser = async (req, res, next) => {
      return res.status(201).json({ posts });
    }
 };
+// ---------------------------------------------------------------------------------
+
+// show all post 
+
+export const allPost = async (req, res, next) => {
+  const posts = await Post.findAll();
+  if (posts.length === 0) {
+    return res.status(201).json({ message: "There are no posts" });
+  } else {
+    return res.status(201).json({ posts });
+  }
+}; 
