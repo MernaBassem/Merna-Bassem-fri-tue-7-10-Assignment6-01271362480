@@ -1,7 +1,7 @@
 import Post from "../../../DB/Models/posts.model.js";
 
 //--------------------------------------------------------
-//create Post 
+//create Post
 export const createPost = async (req, res, next) => {
   const { title, content } = req.body;
   try {
@@ -18,7 +18,7 @@ export const createPost = async (req, res, next) => {
   }
 };
 //-----------------------------------------------------
-// update post 
+// update post
 export const updatePost = async (req, res, next) => {
   const { title, content } = req.body;
   const post = await Post.findByPk(req.params.id);
@@ -49,7 +49,7 @@ export const updatePost = async (req, res, next) => {
   }
 };
 //---------------------------------------------------------------------
-// delete post 
+// delete post
 
 export const DeletePost = async (req, res, next) => {
   const post = await Post.findByPk(req.params.id);
@@ -57,21 +57,37 @@ export const DeletePost = async (req, res, next) => {
     return res.status(400).json({ message: "Post Not Found" });
   } else {
     if (post.UserId === req.userId) {
-      const deletePost = await Post.destroy(
-        {
-          where: {
-            id: req.params.id,
-          },
-        }
-      );
+      const deletePost = await Post.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
 
       return res
         .status(201)
         .json({ message: "Your post has been successfully deleted" });
     } else {
       return res.status(400).json({
-        message: "No one is allowed to delete posts of people other than his own",
+        message:
+          "No one is allowed to delete posts of people other than his own",
       });
     }
   }
+};
+
+//-----------------------------------------------------------------------------
+
+// show all post in specific user
+
+export const listPostOfUser = async (req, res, next) => {
+  const posts = await Post.findAll({
+    where: {
+      UserId: req.userId,
+    },
+  });
+   if (posts.length === 0) {
+     return res.status(201).json({ message: "You have no posts" });
+   } else {
+     return res.status(201).json({ posts });
+   }
 };
