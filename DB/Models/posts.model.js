@@ -1,34 +1,35 @@
 import { DataTypes } from "sequelize";
 import { sequelizeInstance } from "../connection.js";
+import User from "./user.model.js";
 
-
-const User = sequelizeInstance.define(
-  "User",
+const Post = sequelizeInstance.define(
+  "Post",
   {
     id: {
       type: DataTypes.INTEGER(11),
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
+    content: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
-
   {
     timestamps: true,
   }
 );
 
+User.hasMany(Post,{
+    onDelete:"CASCADE",
+    onUpdate:"CASCADE"
+});
+Post.belongsTo(User,{
+  as: 'author'
+});
 
-export default User;
+export default Post ;
