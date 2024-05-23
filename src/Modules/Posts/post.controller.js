@@ -1,5 +1,7 @@
 import Post from "../../../DB/Models/posts.model.js";
 
+//--------------------------------------------------------
+//create Post 
 export const createPost = async (req, res, next) => {
   const { title, content } = req.body;
   try {
@@ -8,12 +10,15 @@ export const createPost = async (req, res, next) => {
       content,
       UserId: req.userId,
     });
-    return res.status(201).json({ message: "Post created Successful", post });
+    return res
+      .status(201)
+      .json({ message: "Your post has been successfully added", post });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
 };
-
+//-----------------------------------------------------
+// update post 
 export const updatePost = async (req, res, next) => {
   const { title, content } = req.body;
   const post = await Post.findByPk(req.params.id);
@@ -33,10 +38,39 @@ export const updatePost = async (req, res, next) => {
         }
       );
 
-      return res.status(201).json({ message: "The Post Updated Successfully" });
+      return res
+        .status(201)
+        .json({ message: "Your post has been successfully edited" });
     } else {
       return res.status(400).json({
         message: "No one is allowed to edit posts of people other than his own",
+      });
+    }
+  }
+};
+//---------------------------------------------------------------------
+// delete post 
+
+export const DeletePost = async (req, res, next) => {
+  const post = await Post.findByPk(req.params.id);
+  if (post === null) {
+    return res.status(400).json({ message: "Post Not Found" });
+  } else {
+    if (post.UserId === req.userId) {
+      const deletePost = await Post.destroy(
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+
+      return res
+        .status(201)
+        .json({ message: "Your post has been successfully deleted" });
+    } else {
+      return res.status(400).json({
+        message: "No one is allowed to delete posts of people other than his own",
       });
     }
   }

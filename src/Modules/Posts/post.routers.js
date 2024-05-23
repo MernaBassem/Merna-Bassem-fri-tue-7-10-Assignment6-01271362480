@@ -7,5 +7,6 @@ const router = Router()
 
 router.post("/createPost", authenticate, PostController.createPost);
 router.put("/updatePost/:id", authenticate, PostController.updatePost);
+router.delete("/deletePost/:id", authenticate, PostController.DeletePost);
 
 export default router;
