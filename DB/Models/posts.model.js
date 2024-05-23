@@ -25,12 +25,10 @@ const Post = sequelizeInstance.define(
 );
 //---------------------------------
 // relation with user table
-User.hasMany(Post,{
-    onDelete:"CASCADE",
-    onUpdate:"CASCADE"
+User.hasMany(Post, {
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 });
-Post.belongsTo(User,{
-  as: 'author'
-});
+Post.belongsTo(User);
 
-export default Post ;
+export default Post;
