@@ -64,3 +64,31 @@ export const updateComment = async (req, res, next) => {
     }
   }
 };
+// ----------------------------------------------------------------
+
+//delete comment 
+
+
+export const deleteComment = async (req, res, next) => {
+  const comment = await Comment.findByPk(req.params.id);
+  if (comment === null) {
+    return res.status(400).json({ message: "Comment Not Found" });
+  } else {
+    if (comment.UserId === req.userId) {
+      const deleteComment = await Comment.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      return res
+        .status(201)
+        .json({ message: "Your Comment has been successfully deleted" });
+    } else {
+      return res.status(400).json({
+        message:
+          "No one is allowed to delete Comment of people other than his own",
+      });
+    }
+  }
+};
