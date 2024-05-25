@@ -31,3 +31,36 @@ export const createComment = async (req, res, next) => {
   }
 };
 
+//............................................................................
+
+// update comment 
+
+export const updateComment = async (req, res, next) => {
+  const {content } = req.body;
+  const comment = await Comment.findByPk(req.params.id);
+  if (comment === null) {
+    return res.status(400).json({ message: "Comment Not Found" });
+  } else {
+    if (comment.UserId === req.userId) {
+      const updateComment = await Comment.update(
+        {
+    
+          content,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+
+      return res
+        .status(201)
+        .json({ message: "Your comment has been successfully edited" });
+    } else {
+      return res.status(400).json({
+        message: "No one is allowed to edit comment of people other than his own",
+      });
+    }
+  }
+};
