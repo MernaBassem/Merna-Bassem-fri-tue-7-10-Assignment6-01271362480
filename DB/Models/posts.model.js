@@ -18,6 +18,10 @@ const Post = sequelizeInstance.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    softDeleted: {
+      type: DataTypes.ENUM("no_soft_deleted", "yes_soft_deleted"),
+      defaultValue: "no_soft_deleted",
+    },
   },
   {
     timestamps: true,
