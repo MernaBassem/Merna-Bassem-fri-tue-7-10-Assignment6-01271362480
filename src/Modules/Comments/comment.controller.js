@@ -141,3 +141,13 @@ export const AllCommentInSpecificPostUserLogin = async (req, res, next) => {
     });
   }
 };
+//----------------------------------------------------------------
+//display all comment 
+
+export const AllComment = async (req,res,next)=>{
+  const comments = await Comment.findAll()
+  if (comments.length===0){
+    return res.status(201).json({message:"No Comment is Found"})
+  }
+  return res.status(201).json({comments})
+}

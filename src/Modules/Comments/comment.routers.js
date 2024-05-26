@@ -17,5 +17,6 @@ router.get(
   "/AllCommentInSpecificPostUserLogin/:id",authenticate,
   CommentController.AllCommentInSpecificPostUserLogin
 );
+router.get("/AllComment", authenticate, CommentController.AllComment);
 
 export default router;
