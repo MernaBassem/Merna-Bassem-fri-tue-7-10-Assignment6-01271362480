@@ -12,5 +12,6 @@ router.delete(
   authenticate,
   CommentController.deleteComment
 );
+router.get('/AllCommentInSpecificPost/:id', CommentController.AllCommentInSpecificPost);
 
 export default router;

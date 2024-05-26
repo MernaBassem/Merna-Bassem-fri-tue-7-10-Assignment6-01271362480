@@ -33,10 +33,10 @@ export const createComment = async (req, res, next) => {
 
 //............................................................................
 
-// update comment 
+// update comment
 
 export const updateComment = async (req, res, next) => {
-  const {content } = req.body;
+  const { content } = req.body;
   const comment = await Comment.findByPk(req.params.id);
   if (comment === null) {
     return res.status(400).json({ message: "Comment Not Found" });
@@ -44,7 +44,6 @@ export const updateComment = async (req, res, next) => {
     if (comment.UserId === req.userId) {
       const updateComment = await Comment.update(
         {
-    
           content,
         },
         {
@@ -59,15 +58,15 @@ export const updateComment = async (req, res, next) => {
         .json({ message: "Your comment has been successfully edited" });
     } else {
       return res.status(400).json({
-        message: "No one is allowed to edit comment of people other than his own",
+        message:
+          "No one is allowed to edit comment of people other than his own",
       });
     }
   }
 };
 // ----------------------------------------------------------------
 
-//delete comment 
-
+//delete comment
 
 export const deleteComment = async (req, res, next) => {
   const comment = await Comment.findByPk(req.params.id);
@@ -90,5 +89,29 @@ export const deleteComment = async (req, res, next) => {
           "No one is allowed to delete Comment of people other than his own",
       });
     }
+  }
+};
+
+//----------------------------------------------------------------------
+
+//display all comme nt in the specific post by id post
+
+export const AllCommentInSpecificPost = async (req, res, next) => {
+  const post = await Post.findByPk(req.params.id);
+  if (post === null) {
+    return res.status(400).json({ message: "Post Not Found" });
+  } else {
+      const comments = await Comment.findAll({
+        where: {
+          PostId: req.params.id,
+        },
+      });
+      if (comments.length===0){
+        return res.status(201).json({ message: "This post has no comments" });
+      }
+      return res.status(201).json({
+        "All Comment in the Post" : comments
+      })
+       
   }
 };
