@@ -151,3 +151,60 @@ export const AllComment = async (req,res,next)=>{
   }
   return res.status(201).json({comments})
 }
+
+//----------------------------------------------------------
+
+//9- Special endpoint to get a specific user with a specific post and 
+// post’s comments.
+
+
+export const getSpecificUserWithPostAndComments = async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User Not Found" });
+    }
+
+    const posts = await Post.findAll({
+      where: {
+        UserId: req.userId,
+      },
+    });
+
+    if (posts.length === 0) {
+      return res.status(200).json({
+        UserDetail: user,
+        Posts: "This user has no posts",
+      });
+    } else {
+      const allPostAndComment = await Promise.all(
+        posts.map(async (post) => {
+          const comments = await Comment.findAll({
+            where: {
+              PostId: post.id,
+            },
+          });
+
+          if (comments.length === 0) {
+            return {
+              post,
+              comments: { message: "There are no comments for this post" },
+            };
+          } else {
+            return {
+              post,
+              comments,
+            };
+          }
+        })
+      );
+
+      return res.status(200).json({
+        UserDetail: user,
+        Posts: allPostAndComment,
+      });
+    }
+  } catch (error) {
+    next(error); 
+  }
+};

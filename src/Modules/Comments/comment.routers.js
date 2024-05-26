@@ -19,4 +19,11 @@ router.get(
 );
 router.get("/AllComment", authenticate, CommentController.AllComment);
 
+//-----------------------------------------------
+router.get(
+  "/getSpecificUserWithPostAndComments",
+  authenticate,
+  CommentController.getSpecificUserWithPostAndComments
+);
+
 export default router;
