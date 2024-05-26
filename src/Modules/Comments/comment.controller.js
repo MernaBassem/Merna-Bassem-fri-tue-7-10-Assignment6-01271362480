@@ -94,24 +94,50 @@ export const deleteComment = async (req, res, next) => {
 
 //----------------------------------------------------------------------
 
-//display all comme nt in the specific post by id post
+//display all comment in the specific post by id post
 
 export const AllCommentInSpecificPost = async (req, res, next) => {
   const post = await Post.findByPk(req.params.id);
   if (post === null) {
     return res.status(400).json({ message: "Post Not Found" });
   } else {
-      const comments = await Comment.findAll({
-        where: {
-          PostId: req.params.id,
-        },
-      });
-      if (comments.length===0){
-        return res.status(201).json({ message: "This post has no comments" });
-      }
-      return res.status(201).json({
-        "All Comment in the Post" : comments
-      })
-       
+    const comments = await Comment.findAll({
+      where: {
+        PostId: req.params.id,
+      },
+    });
+    if (comments.length === 0) {
+      return res.status(201).json({ message: "This post has no comments" });
+    }
+    return res.status(201).json({
+      "All Comment in the Post": comments,
+    });
+  }
+};
+
+//--------------------------------------------------------------------------
+
+// display all comment in specific post  to user is login
+// All comments for this post by this user
+
+export const AllCommentInSpecificPostUserLogin = async (req, res, next) => {
+  const post = await Post.findByPk(req.params.id);
+  if (post === null) {
+    return res.status(400).json({ message: "Post Not Found" });
+  } else {
+   const comments = await Comment.findAll({
+     where: {
+       PostId: req.params.id,
+       UserId: req.userId,
+     },
+   });
+    if (comments.length === 0) {
+      return res
+        .status(201)
+        .json({ message: "This post has no comments from this user" });
+    }
+    return res.status(201).json({
+      "All comments for this post by this user": comments,
+    });
   }
 };

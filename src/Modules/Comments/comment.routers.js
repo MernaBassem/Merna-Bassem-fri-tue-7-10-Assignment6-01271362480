@@ -12,6 +12,10 @@ router.delete(
   authenticate,
   CommentController.deleteComment
 );
-router.get('/AllCommentInSpecificPost/:id', CommentController.AllCommentInSpecificPost);
+router.get('/AllCommentInSpecificPost/:id',authenticate, CommentController.AllCommentInSpecificPost);
+router.get(
+  "/AllCommentInSpecificPostUserLogin/:id",authenticate,
+  CommentController.AllCommentInSpecificPostUserLogin
+);
 
 export default router;
