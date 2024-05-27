@@ -154,9 +154,8 @@ export const AllComment = async (req,res,next)=>{
 
 //----------------------------------------------------------
 
-//9- Special endpoint to get a specific user with a specific post and 
+//Special endpoint to get a specific user with a specific post and 
 // post’s comments.
-
 
 export const getSpecificUserWithPostAndComments = async (req, res, next) => {
   try {

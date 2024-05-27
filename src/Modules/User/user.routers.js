@@ -8,5 +8,6 @@ const router = Router()
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.post("/logout",authenticate, UserController.logout);
+router.delete("/deleteAccount", authenticate, UserController.deleteAccount);
 
 export default router ; 

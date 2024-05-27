@@ -36,7 +36,7 @@ export const login = async (req, res, next) => {
   });
   // check the email is found
   if (user === null) {
-    return res.status(400).json("Email Not Found");
+    return res.status(400).json({message:"Email Not Found"});
   } else {
     // after check email
     // check Password is correct
@@ -47,7 +47,7 @@ export const login = async (req, res, next) => {
       const token = jwt.sign({ userId: user.id }, "your_secret_key");
       return res.status(201).json({ token });
     } else {
-      return res.status(400).json("Password inCorrect");
+      return res.status(400).json({message:"Password inCorrect"});
     }
   }
 };
@@ -58,4 +58,16 @@ export const login = async (req, res, next) => {
 
 export const logout = (req,res,next)=>{
     return res.json({message : "LogOut Successful"})
+}
+
+//---------------------------------------------------------------
+//delete account 
+
+export const deleteAccount = async (req,res,next)=>{
+  const user = await User.destroy({
+    where:{
+      id:req.userId
+    }
+  })
+  return res.status(200).json({ message: "Your account has been deleted."});
 }
