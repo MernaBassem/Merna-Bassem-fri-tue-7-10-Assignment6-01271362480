@@ -1,0 +1,553 @@
+{
+	"info": {
+		"_postman_id": "97d3859d-e4ca-40f7-bd14-b59c4a832ade",
+		"name": "facebook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32953180"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Mariam Bassem\" ,\r\n    \"email\" : \"merna@gmail.com\",\r\n    \"password\" : \"123\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "register user send in body\n\n1- username\n\n2- email\n\n3- password"
+					},
+					"response": []
+				},
+				{
+					"name": "login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"merna1@gmail.com\",\r\n    \"password\":\"1123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						},
+						"description": "login user by send in body\n\n1- email\n\n2-password\n\nresponse is token"
+					},
+					"response": []
+				},
+				{
+					"name": "logOut user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjQ2MDM0N30.L2yQeGwSxyEKU5POjNvnP06AWi5IiuT_1S9eZmWAaV"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						},
+						"description": "send token in header to the sure in user"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxNjgwOTYyNH0.hZGPZewv2xz8AJIXpou4Zv937vdQh-Tg9D3tl3IQkuA"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user/deleteAccount",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"deleteAccount"
+							]
+						},
+						"description": "send token in the header to is sure user to delete account"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "createPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxNjYzMjMzM30.ybm8_j5PGBymMl0hBgEDG2KxF0SqbXKZ7hMG5EYdSwk"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"post2\",\r\n    \"content\":\"Optional. If specified, the random text start at a random word of the lorum ipsum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/post/createPost",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"createPost"
+							]
+						},
+						"description": "first send token in header to known information of user\n\nif the create post to take the information user froة token\n\nto create post send tree information  \n1- userId --- take from token\n\n2- title the post\n\n3- content post"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePost",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjQ2NDc4NX0.0mCHCmc41LjQjwesWvvdCB0zWUvt4Uo3TYiQBVkTQqo"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"post111111\",\r\n    \"content\":\"Optional. If specified, the random text start at a random word of the lorum ipsum\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/post/updatePost/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"updatePost",
+								"1"
+							]
+						},
+						"description": "first send token in header to known information of user\n\nif the update post to take the information user from token\n\nto update post send tree information  \n1- userId --- take from token\n\n2- title the post\n\n3- content post\n\nand send the id post in params to check the specific post\n\nOnly the user who published the post can update it"
+					},
+					"response": []
+				},
+				{
+					"name": "deletePost",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjQ2NDc4NX0.0mCHCmc41LjQjwesWvvdCB0zWUvt4Uo3TYiQBVkTQqo"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/post/deletePost/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"deletePost",
+								"1"
+							]
+						},
+						"description": "first send token in header to known information of user\n\nif the delete post to take the information user from token\n\nto update post send tree information  \n\nand send the id post in params to check the specific post\n\nOnly the user who published the post can delete it"
+					},
+					"response": []
+				},
+				{
+					"name": "listPostOfUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjQ2NDc4NX0.0mCHCmc41LjQjwesWvvdCB0zWUvt4Uo3TYiQBVkTQqo"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/post/listPostOfUser",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"listPostOfUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allPost",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjQ2NDc4NX0.0mCHCmc41LjQjwesWvvdCB0zWUvt4Uo3TYiQBVkTQqo"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/post/allPost",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"allPost"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "specific Post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjYyNzkzM30.BXejcp-1eND2hI3zZWArrtQdHpV7g0iCgul2ROE1V6A"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/post/SpecificPost/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"SpecificPost",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SpecificPostWithAuthor",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjYyNzkzM30.BXejcp-1eND2hI3zZWArrtQdHpV7g0iCgul2ROE1V6A"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/post/SpecificPostWithAuthor/5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"SpecificPostWithAuthor",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Soft Deleted Post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjYzMjQ3MX0.C9aDD4byR_HjY4_Ha2J9f07g_RyLVY-nMMpxzp6wda8"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/post/softDeletedPost/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"post",
+								"softDeletedPost",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjY1ODU1OX0.cMqUH6b1mYDX_1aEdp1x5U6_PjpUIG0YD7mHeNNb8yU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"PostId\":2,\r\n    \"content\":\"happy birthday\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comment/createComment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"createComment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxNjY1OTU3NH0.MUk9Yv1p8rK5RjWON2MF0e0tLZTTXhuIYMFjJaXtkU0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"Merna Bassem\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comment/updateComment/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"updateComment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxNjY2MDM1NH0.Hw14855pe9xbnxhkxSa5DK3xdw2cwx4lBirsiwSSC3M"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comment/deleteComment/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"deleteComment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AllCommentInSpecificPost",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxNjcxNTkxM30.FxWXPidKX9JvUjRBH78cnyTS52Wimcs1J3ixFiAxekc"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comment/AllCommentInSpecificPost/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"AllCommentInSpecificPost",
+								"2"
+							]
+						},
+						"description": "URL ---> {{baseUrl}}/comment/AllCommentInSpecificPost/(post id)\n\nresult --- display all comment in specific post"
+					},
+					"response": []
+				},
+				{
+					"name": "All comments for this post by this user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxNjcxNTkxM30.FxWXPidKX9JvUjRBH78cnyTS52Wimcs1J3ixFiAxekc"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comment/AllCommentInSpecificPostUserLogin/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"AllCommentInSpecificPostUserLogin",
+								"2"
+							]
+						},
+						"description": "url -- > {{baseUrl}}/comment/AllCommentInSpecificPostUserLogin/(post id)  \n  \nresult -- > all commment in specific post from user is login"
+					},
+					"response": []
+				},
+				{
+					"name": "AllComment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxNjcxNTkxM30.FxWXPidKX9JvUjRBH78cnyTS52Wimcs1J3ixFiAxekc"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comment/AllComment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"AllComment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a specific user with a specific post and  post’s comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxNjcyMDk1Nn0.xDjRnQ5rZB-Z7FAvqxkwfhM7EiemcDD7Z1npo0yAWFo"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comment/getSpecificUserWithPostAndComments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comment",
+								"getSpecificUserWithPostAndComments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}
